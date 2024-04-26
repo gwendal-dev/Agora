@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Agora</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag 'logo.png'%>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container">
+    <!-- Logo de l'application -->
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "logo.png", alt: "Logo de votre application", style: "width: 40px; height: 40px;" %>
+    <% end %>
+    
+    <!-- Barre de recherche au centre -->
+    <form class="form-inline mx-auto">
+      <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
+    </form>
+
+    <!-- Image de l'utilisateur à droite -->
+    <div class="navbar-text ml-auto">
+      <img src="/assets/user.png" alt="Image de l'utilisateur" class="rounded-circle">
+    </div>
+  </div>
+</nav>
+
+
+    <nav class="navbar-left">
+    <%= link_to root_path do %>
+      Home
+    <% end %>
+      <a href="/explore">Explore</a>
+      <a href="/notifications">Notifications</a>
+      <a href="/messages">Direct Messages</a>
+      <a href="/DMoilheure/lists">Lists</a>
+      <a href="/i/bookmarks">Bookmarks</a>
+      <a href="/DMoilheure/communities">Communities</a>
+      <a href="/i/premium_sign_up">Premium</a>
+      <a href="/DMoilheure" class="profile">Profile</a>
+      <% if user_signed_in? %>
+        <!-- Si l'utilisateur est connecté, afficher un bouton de déconnexion -->
+        <%= form_with(url: destroy_user_session_path, method: :delete) do |form| %>
+          <%= form.submit "Se déconnecter" %>
+        <% end %>
+      <% else %>
+        <!-- Si l'utilisateur n'est pas connecté, afficher des boutons de connexion et d'inscription -->
+        <%= link_to "Connexion", new_user_session_path %>
+        <%= link_to "Inscription", new_user_registration_path %>
+      <% end %>
+    </nav>
+    <div class="container-web">
+      <%= yield %>
+    </div>
+  </body>
+</html>

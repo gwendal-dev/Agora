@@ -1,0 +1,55 @@
+<div class="subject-show-container">
+  <!-- Close button -->
+  <% if user_signed_in? && current_user == @subject.user %>
+    <%= button_to "X", @subject, method: :delete, class: "close-button" %>
+  <% end %>
+  <div class="option-show-subject">
+    <% if user_signed_in? && current_user == @subject.user %>
+      <%= link_to "Edit this subject", edit_subject_path(@subject) %> |
+    <% end %>
+    <%= link_to "Back to subjects", subjects_path %>
+  </div>
+
+  <!-- Détails du sujet -->
+  <div class="subject-details">
+    <h1><%= @subject.title %></h1>
+    <p class="subject-content"><strong> <%= @subject.user.name %></strong>
+    <br>
+    <%= @subject.content %></p>
+  </div>
+  <div class="ligne"></div>
+  <ul class="message-list">
+    <% if @messages != nil %>
+      <% @messages.each do |message| %>
+        <li class="message">
+          <div class="message-header">
+          <%= image_tag "user.png", alt: "Logo de votre application", :class => "profile-image"%>
+          <span class="message-user"><%= message.user.name %></span>
+            <% if user_signed_in? && current_user == @subject.user %>
+              <%= link_to edit_message_path(message), class: "edit-message-link", aria_label: "Edit message" do %>
+                <i class="fa fa-pencil-alt"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="message-content">
+            <%= message.content %>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <!-- Ajouter un formulaire pour créer un nouveau message -->
+  <div class="new-message-form">
+    <%= form_with(model: [@subject, Message.new], local: true) do |form| %>
+      <div class="field">
+        <%= form.label :content %>
+        <%= form.text_area :content, class: "message-content" %>
+      </div>
+      
+      <div class="actions">
+        <%= form.submit "Add Message", class: "submit-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

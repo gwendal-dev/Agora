@@ -1,0 +1,126 @@
+/* Style pour le conteneur de la page */
+.subject-show-container {
+  // padding: 20px;
+  display: flex; /* Utilise Flexbox */
+  justify-content: center; /* Centre les éléments horizontalement */
+  align-items: center; /* Centre les éléments verticalement */
+  flex-direction: column; /* Aligne les éléments en colonne */
+  margin-top: 50px;
+  margin-right: 100px;
+}
+
+/* Style pour le titre */
+.subject-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+/* Style pour les détails du sujet */
+.subject-details {
+  margin-top: 75px;
+  width: 700px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-start;
+  // margin-left: 200px;
+}
+
+.subject-details p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Style pour la liste des messages */
+.message-list {
+  list-style-type: none;
+  margin-left: 20px;
+  height: 20%;
+  width: 50%;
+  margin-top: 30px;
+}
+
+.message-list li {
+  margin-bottom: 10px;
+  background-color: #333;
+}
+
+/* Style pour le nom d'utilisateur */
+.message-user {
+  font-weight: bold;
+}
+
+.message {
+  min-height: 100px;
+}
+
+.subject-content {
+  background-color: #fff;
+  width: 700px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  min-height: 200px;
+  // margin: 100px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.ligne {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc; /* Couleur de la ligne */
+}
+
+.option-show-subject {
+  position: absolute;
+  top: 100px;
+  right: 0;
+}
+.close-button {
+  position: relative;
+  top: 180px;
+  right: -330px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: red;
+  cursor: pointer;
+}
+
+.message-content {
+  width: 90%;
+  word-wrap: break-word; /* Ensures that long words will wrap and not cause overflow */
+  overflow-wrap: break-word; /* Breaks the word at the edge of the content box if needed */
+  background-color: #fff;
+}
+
+.message-header {
+  color: #fff;
+  display: flex;
+  justify-content: space-between; /* Align items to the ends of the container */
+  width: 100%; /* Use the full width of the list item for spacing */
+}
+
+.message-user {
+  flex-grow: 1; /* Allows the user's name to occupy the left space */
+  text-align: left; /* Aligns the user's name to the left */
+}
+
+.edit-message-link {
+  margin-left: auto; /* Pushes the link to the right */
+  text-align: right; /* Ensures the link aligns to the right */
+}
+.edit-message-link .fa {
+  color: #fff; /* Change the color */
+  font-size: 16px; /* Change the size */
+  vertical-align: middle;
+}
+.profile-image {
+  width: 30px; /* or any size that fits your design */
+  height: 30px; /* maintain aspect ratio */
+  border-radius: 50%; /* makes the image circular */
+  margin-right: 10px; /* space between the image and the name */
+  margin-bottom: 10px;
+}

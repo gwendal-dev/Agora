@@ -1,0 +1,41 @@
+.navbar-left {
+  position: fixed;
+  left: 0;
+  width: 200px; /* Ajustez la largeur de la navbar selon vos besoins */
+  height: 100%; /* Assurez-vous que la navbar occupe toute la hauteur de la page */
+  background-color: #333; /* Couleur de fond de la navbar */
+  padding-top: 20px; /* Espace en haut de la navbar */
+}
+
+.navbar-left a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px; /* Espace autour des liens */
+  transition: background-color 0.3s ease; /* Transition en cas de survol */
+}
+
+.navbar-left a:hover {
+  background-color: #555; /* Couleur de fond lors du survol */
+}
+
+.navbar {
+  border-bottom: solid #9e9a9a;
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+}
+
+.navbar-brand img {
+  position: fixed;
+  left: 20px;
+  top: 15px;
+  width: 50px;
+  height: 50px;
+}
+
+.navbar-text img {
+  width: 40px;
+  height: 40px;
+}

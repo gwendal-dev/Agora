@@ -1,0 +1,90 @@
+.container-web {
+  margin-left: 250px;
+  margin-top: 73px;
+}
+
+/* app/assets/stylesheets/subjects.scss */
+
+body {
+  font-family: "Montserrat", "Roboto", sans-serif;
+}
+
+ul a {
+  text-decoration: none;
+  color: #000;
+}
+
+// Style de la liste des sujets
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+}
+
+h1 {
+  color: #333;
+}
+
+.list-subjects {
+  display: flex;
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne lorsque nécessaire */
+  justify-content: space-around; /* Répartit les éléments équitablement sur la ligne */
+  // margin-left: 200px;
+  margin-right: 50px;
+  // margin-top: 50px;
+  padding: 0;
+}
+
+.list-subjects a {
+  flex-basis: calc(33.33% - 20px); /* Définit la largeur de chaque sujet */
+  margin: 10px; /* Marge entre les sujets */
+}
+
+.subject {
+  height: 205px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-decoration: none; /* Pour supprimer le soulignement par défaut */
+  transition: transform 0.5s ease; /* Ajoute une transition fluide */
+}
+
+.subject:hover {
+  transform: scale(1.05); /* Grossissement de 10% lors du survol */
+}
+/* Retirer le style par défaut des liens */
+.subject a {
+  text-decoration: none; /* Supprime le soulignement */
+  color: inherit; /* Utilise la couleur du texte parent */
+  font-size: 14px;
+}
+
+.subject a:hover {
+  text-decoration: none; /* Supprime le soulignement */
+  color: inherit; /* Utilise la couleur du texte parent */
+}
+
+.subject-link {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.button-subject {
+  margin: 30px;
+  background-color: #04aa6d; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}

@@ -1,0 +1,10 @@
+<%= link_to "New subject", new_subject_path, class: "button-subject" %>
+
+<ul class="list-subjects">
+<% @subjects.each do |subject| %>
+  <%= link_to subject do %>
+      <%= render subject %>
+    
+  <% end %>
+<% end %>
+</ul>
