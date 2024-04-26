@@ -124,3 +124,8 @@
   margin-right: 10px; /* space between the image and the name */
   margin-bottom: 10px;
 }
+.message-content-textarea {
+  resize: none;
+  width: 600px;
+  min-height: 200px;
+}

@@ -44,7 +44,7 @@
     <%= form_with(model: [@subject, Message.new], local: true) do |form| %>
       <div class="field">
         <%= form.label :content %>
-        <%= form.text_area :content, class: "message-content" %>
+        <%= form.text_area :content, class: "message-content-textarea" %>
       </div>
       
       <div class="actions">
