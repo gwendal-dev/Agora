@@ -17,8 +17,12 @@
 
 /* Style pour les détails du sujet */
 .subject-details {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #333;
+  border-radius: 15px;
   margin-top: 75px;
   width: 700px;
+  padding: 10px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -36,15 +40,15 @@
 /* Style pour la liste des messages */
 .message-list {
   list-style-type: none;
-  margin-left: 20px;
-  height: 20%;
-  width: 50%;
   margin-top: 30px;
 }
 
 .message-list li {
-  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 15px;
+  margin-bottom: 20px;
   background-color: #333;
+  width: 600px;
 }
 
 /* Style pour le nom d'utilisateur */
@@ -79,9 +83,6 @@
   right: 0;
 }
 .close-button {
-  position: relative;
-  top: 180px;
-  right: -330px;
   background: none;
   border: none;
   font-size: 20px;
@@ -128,4 +129,80 @@
   resize: none;
   width: 600px;
   min-height: 200px;
+}
+
+.delete-message-link,
+.edit-message-link {
+  margin-left: 5px;
+  color: red; /* couleur des icônes */
+}
+
+.delete-message-link i,
+.edit-message-link i {
+  cursor: pointer; /* rend les icônes cliquables visuellement */
+}
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.message-content,
+.subject-content {
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.message-user {
+  font-weight: bold;
+}
+
+.edit-message-link,
+.delete-message-link {
+  margin-left: 10px;
+}
+.subject-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.edit-subject-link {
+  margin-right: 10px;
+  font-size: 20px;
+  color: #fff; /* Modifiez la couleur au besoin */
+}
+
+.fa-pencil-alt,
+.fa-times {
+  margin-right: 5px;
+}
+.back-to-subjects-link {
+  color: black; /* Modifiez la couleur au besoin */
+}
+
+.back-to-subjects-link i {
+  margin-right: 5px; /* Espacement entre l'icône et le texte si vous ajoutez du texte */
+}
+
+.fa-arrow-left {
+  position: absolute;
+  top: 100px;
+  left: 250px;
+  text-decoration: none;
+  font-size: 26px;
+  margin-top: 20px;
+}
+.title {
+  margin-top: 20px;
 }

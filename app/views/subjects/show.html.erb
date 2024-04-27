@@ -1,33 +1,42 @@
 <div class="subject-show-container">
-  <!-- Close button -->
-  <% if user_signed_in? && current_user == @subject.user %>
-    <%= button_to "X", @subject, method: :delete, class: "close-button" %>
+  <%= link_to subjects_path, class: "back-to-subjects-link", aria_label: "Back to subjects" do %>
+    <i class="fas fa-arrow-left"></i> <!-- Icône de flèche gauche -->
   <% end %>
-  <div class="option-show-subject">
-    <% if user_signed_in? && current_user == @subject.user %>
-      <%= link_to "Edit this subject", edit_subject_path(@subject) %> |
-    <% end %>
-    <%= link_to "Back to subjects", subjects_path %>
-  </div>
-
+  <h1 class="title"><%= @subject.title %></h1>
   <!-- Détails du sujet -->
   <div class="subject-details">
-    <h1><%= @subject.title %></h1>
-    <p class="subject-content"><strong> <%= @subject.user.name %></strong>
-    <br>
-    <%= @subject.content %></p>
+    <div class="message-header">
+      <%= image_tag "user.png", alt: "Profile image", class: "profile-image" %>
+      <span class="message-user"><strong><%= @subject.user.name %></strong></span>
+      <% if user_signed_in? && current_user == @subject.user %>
+      <div class="subject-buttons">
+        <%= link_to edit_subject_path(@subject), class: "edit-subject-link", aria_label: "Edit subject" do %>
+          <i class="fa fa-pencil-alt"></i>
+        <% end %>
+        <%= button_to "X", @subject, method: :delete, data: { confirm: "Are you sure?" }, class: "close-button" %>
+      <% end %>
+      </div>
+    </div>
+    <div class="message-content">
+      <%= @subject.content %>
+    </div>
   </div>
   <div class="ligne"></div>
+
+  <!-- Liste des messages -->
   <ul class="message-list">
     <% if @messages != nil %>
       <% @messages.each do |message| %>
         <li class="message">
           <div class="message-header">
-          <%= image_tag "user.png", alt: "Logo de votre application", :class => "profile-image"%>
-          <span class="message-user"><%= message.user.name %></span>
+            <%= image_tag "user.png", alt: "Logo de votre application", class: "profile-image" %>
+            <span class="message-user"><%= message.user.name %></span>
             <% if user_signed_in? && current_user == @subject.user %>
               <%= link_to edit_message_path(message), class: "edit-message-link", aria_label: "Edit message" do %>
                 <i class="fa fa-pencil-alt"></i>
+              <% end %>
+              <%= link_to message_path(message), method: :delete, data: { confirm: "Are you sure?" }, class: "delete-message-link", aria_label: "Delete message" do %>
+                <i class="fa fa-times"></i>
               <% end %>
             <% end %>
           </div>
@@ -39,14 +48,13 @@
     <% end %>
   </ul>
 
-  <!-- Ajouter un formulaire pour créer un nouveau message -->
+  <!-- Formulaire pour créer un nouveau message -->
   <div class="new-message-form">
     <%= form_with(model: [@subject, Message.new], local: true) do |form| %>
       <div class="field">
         <%= form.label :content %>
         <%= form.text_area :content, class: "message-content-textarea" %>
       </div>
-      
       <div class="actions">
         <%= form.submit "Add Message", class: "submit-button" %>
       </div>
