@@ -23,5 +23,10 @@ module Login
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    # Set the default timezone to Central European Time (Paris)
+    config.time_zone = 'Paris'
+    
+    # Optional: If you are using Active Record and want to ensure that times are stored in UTC in the database
+    config.active_record.default_timezone = :utc
   end
 end

@@ -1,10 +1,18 @@
-<div id="<%= dom_id message %>">
-  <p>
+<div id="<%= dom_id(message) %>" class="message-container">
+  <div class="icon-bar">
+  <% if message.created_at >= 5.minutes.ago %>
+    <%= link_to edit_subject_message_path(@message), class: "edit-message-link", aria_label: "Edit message" do %>
+      <i class="fa fa-pencil-alt"></i>
+    <% end %>
+  <% end %>
+  <%= button_to "X", subject_message_path(@message), method: :delete, data: { confirm: "Are you sure?" }, class: "close-button" %>
+
+  </div>
+  <p class="message-content">
     <strong>Content:</strong>
     <%= message.content %>
   </p>
-
-  <p>
+  <p class="message-subject">
     <strong>Subject:</strong>
     <%= message.subject_id %>
   </p>

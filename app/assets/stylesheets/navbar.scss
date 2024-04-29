@@ -5,6 +5,7 @@
   height: 100%; /* Assurez-vous que la navbar occupe toute la hauteur de la page */
   background-color: #333; /* Couleur de fond de la navbar */
   padding-top: 20px; /* Espace en haut de la navbar */
+  top: 70px;
 }
 
 .navbar-left a {
@@ -38,4 +39,23 @@
 .navbar-text img {
   width: 40px;
   height: 40px;
+}
+form.inline button {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  margin-left: 19px;
+  height: 44px;
+  background: none;
+  color: white;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
+  align-content: center;
+  align-items: center;
+}
+form.inline:hover {
+  background-color: #555; /* Couleur de fond lors du survol */
 }

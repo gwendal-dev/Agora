@@ -1,9 +1,9 @@
-<h1>Editing message</h1>
-
 <%= render "form", message: @message %>
 
 <br>
 
 <div>
-  <%= link_to "Back to subject", subject_path(@subject) %>
+<%= link_to subject_path(@subject), class: "back-to-subjects-link", aria_label: "Back to subjects" do %>
+  <i class="fas fa-arrow-left"></i> <!-- Icône de flèche gauche -->
+<% end %>
 </div>

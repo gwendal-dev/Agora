@@ -1,30 +1,29 @@
-<%= form_with(model: subject) do |form| %>
+<%= form_with(model: subject, local: true, html: { class: "custom-form" }) do |form| %>
   <% if subject.errors.any? %>
-    <div style="color: red">
+    <div class="error-explanation">
       <h2><%= pluralize(subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
-
       <ul>
-        <% subject.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% subject.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <!-- Champ caché pour user_id -->
+  <!-- Hidden field for user_id -->
   <%= form.hidden_field :user_id, value: current_user.id if user_signed_in? %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="form-field">
+    <%= form.label :title, "Title" %>
+    <%= form.text_field :title, class: "form-text-input" %>
   </div>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
+  <div class="form-field">
+    <%= form.label :content, "Content" %>
+    <%= form.text_area :content, class: "form-textarea" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= form.submit "Submit", class: "form-submit-button" %>
   </div>
 <% end %>

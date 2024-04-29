@@ -3,8 +3,7 @@
 <%= render @message %>
 
 <div>
-  <%= link_to "Edit this message", edit_message_path(@message) %> |
-  <%= link_to "Back to messages", messages_path %>
-
-  <%= button_to "Destroy this message", @message, method: :delete %>
+<%= link_to subject_path(@subject), class: "back-to-subjects-link", aria_label: "Back to subjects" do %>
+  <i class="fas fa-arrow-left"></i> <!-- Icône de flèche gauche -->
+<% end %>
 </div>

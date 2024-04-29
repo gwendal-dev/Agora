@@ -1,9 +1,9 @@
-<h1>New subject</h1>
-
 <%= render "form", subject: @subject %>
 
 <br>
 
 <div>
-  <%= link_to "Back to subjects", subjects_path %>
+<%= link_to subjects_path, class: "back-to-subjects-link", aria_label: "Back to subjects" do %>
+  <i class="fas fa-arrow-left"></i> <!-- Icône de flèche gauche -->
+<% end %>
 </div>

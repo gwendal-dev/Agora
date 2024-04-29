@@ -22,6 +22,8 @@ gem "turbo-rails"
 
 gem 'devise'
 
+gem 'webpacker'
+
 gem 'bootstrap', '~> 5.3.0'
 
 gem 'sassc-rails', '~> 2.0'

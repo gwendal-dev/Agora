@@ -9,6 +9,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="csrf-token" content="<%= form_authenticity_token %>">
   </head>
 
   <body>
@@ -32,29 +33,26 @@
 </nav>
 
 
-    <nav class="navbar-left">
-    <%= link_to root_path do %>
-      Home
-    <% end %>
-      <a href="/explore">Explore</a>
-      <a href="/notifications">Notifications</a>
-      <a href="/messages">Direct Messages</a>
-      <a href="/DMoilheure/lists">Lists</a>
-      <a href="/i/bookmarks">Bookmarks</a>
-      <a href="/DMoilheure/communities">Communities</a>
-      <a href="/i/premium_sign_up">Premium</a>
-      <a href="/DMoilheure" class="profile">Profile</a>
-      <% if user_signed_in? %>
-        <!-- Si l'utilisateur est connecté, afficher un bouton de déconnexion -->
-        <%= form_with(url: destroy_user_session_path, method: :delete) do |form| %>
-          <%= form.submit "Se déconnecter" %>
-        <% end %>
+<nav class="navbar-left">
+  <%= link_to "Home", root_path %>
+  <a href="/explore">Explore</a>
+  <a href="/notifications">Notifications</a>
+  <a href="/messages">Direct Messages</a>
+  <a href="/DMoilheure/lists">Lists</a>
+  <a href="/i/bookmarks">Bookmarks</a>
+  <a href="/DMoilheure/communities">Communities</a>
+  <a href="/i/premium_sign_up">Premium</a>
+  <a href="/DMoilheure" class="profile">Profile</a>
+  <% if user_signed_in? %>
+      <!-- Replace form with a link for logout -->
+      <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, form_class: "inline" %>
       <% else %>
-        <!-- Si l'utilisateur n'est pas connecté, afficher des boutons de connexion et d'inscription -->
-        <%= link_to "Connexion", new_user_session_path %>
-        <%= link_to "Inscription", new_user_registration_path %>
-      <% end %>
-    </nav>
+      <!-- Display login and signup links if the user is not logged in -->
+      <%= link_to "Connexion", new_user_session_path, class: "login-link" %>
+      <%= link_to "Inscription", new_user_registration_path, class: "signup-link" %>
+  <% end %>
+</nav>
+
     <div class="container-web">
       <%= yield %>
     </div>

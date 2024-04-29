@@ -1,21 +1,23 @@
 <div class="subject-show-container">
-  <%= link_to subjects_path, class: "back-to-subjects-link", aria_label: "Back to subjects" do %>
-    <i class="fas fa-arrow-left"></i> <!-- Icône de flèche gauche -->
+  <%= link_to subjects_path, class: "back-to-subjects-link", "aria-label" => "Back to subjects" do %>
+    <i class="fas fa-arrow-left"></i> <!-- Icon of left arrow -->
   <% end %>
   <h1 class="title"><%= @subject.title %></h1>
-  <!-- Détails du sujet -->
+  <!-- Subject Details -->
   <div class="subject-details">
     <div class="message-header">
       <%= image_tag "user.png", alt: "Profile image", class: "profile-image" %>
       <span class="message-user"><strong><%= @subject.user.name %></strong></span>
       <% if user_signed_in? && current_user == @subject.user %>
-      <div class="subject-buttons">
-        <%= link_to edit_subject_path(@subject), class: "edit-subject-link", aria_label: "Edit subject" do %>
-          <i class="fa fa-pencil-alt"></i>
-        <% end %>
-        <%= button_to "X", @subject, method: :delete, data: { confirm: "Are you sure?" }, class: "close-button" %>
+        <div class="subject-buttons">
+          <% if @subject.created_at >= 5.minutes.ago %>
+            <%= link_to edit_subject_path(@subject), class: "edit-subject-link", "aria-label" => "Edit subject" do %>
+              <i class="fa fa-pencil-alt"></i>
+            <% end %>
+          <% end %>
+          <%= button_to "X", subject_path(@subject), method: :delete, data: { confirm: "Are you sure?" }, class: "close-button" %>
+        </div>
       <% end %>
-      </div>
     </div>
     <div class="message-content">
       <%= @subject.content %>
@@ -23,36 +25,41 @@
   </div>
   <div class="ligne"></div>
 
-  <!-- Liste des messages -->
+  <!-- List of Messages -->
   <ul class="message-list">
-    <% if @messages != nil %>
+    <% if @messages.present? %>
       <% @messages.each do |message| %>
         <li class="message">
           <div class="message-header">
-            <%= image_tag "user.png", alt: "Logo de votre application", class: "profile-image" %>
+            <%= image_tag "user.png", alt: "User profile image", class: "profile-image" %>
             <span class="message-user"><%= message.user.name %></span>
-            <% if user_signed_in? && current_user == @subject.user %>
-              <%= link_to edit_message_path(message), class: "edit-message-link", aria_label: "Edit message" do %>
-                <i class="fa fa-pencil-alt"></i>
+            <%= link_to 'Quote', '#', class: "quote-link", data: { content: message.content, username: message.user.name, date: message.created_at.strftime("%d %b %Y %H:%M") } %>
+            <% if user_signed_in? && current_user == message.user %>
+              <% if message.created_at >= 5.minutes.ago %>
+                <%= link_to edit_subject_message_path(@subject, message), class: "edit-message-link", "aria-label" => "Edit message" do %>
+                  <i class="fa fa-pencil-alt"></i>
+                <% end %>
               <% end %>
-              <%= link_to message_path(message), method: :delete, data: { confirm: "Are you sure?" }, class: "delete-message-link", aria_label: "Delete message" do %>
-                <i class="fa fa-times"></i>
-              <% end %>
+              <%= button_to "X", subject_message_path(@subject, message), method: :delete, data: { confirm: "Are you sure?" }, class: "close-button" %>
             <% end %>
           </div>
           <div class="message-content">
             <%= message.content %>
+            <br>
+            <small class="message-date"><%= message.created_at.strftime("%d %b %Y %H:%M") %></small>
           </div>
         </li>
       <% end %>
+    <% else %>
+      <p>No messages to display.</p>
     <% end %>
   </ul>
 
-  <!-- Formulaire pour créer un nouveau message -->
+  <!-- Form for Creating a New Message -->
   <div class="new-message-form">
     <%= form_with(model: [@subject, Message.new], local: true) do |form| %>
       <div class="field">
-        <%= form.label :content %>
+        <%= form.label :content, "Message:" %>
         <%= form.text_area :content, class: "message-content-textarea" %>
       </div>
       <div class="actions">
