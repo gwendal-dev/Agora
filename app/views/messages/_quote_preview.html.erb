@@ -1,0 +1,14 @@
+<!-- _quote_preview.html.erb -->
+<% message.full_quote.each do |quote| %>
+    <div class="quote">
+      <strong><%= quote.user.name %></strong>
+      <br>
+      <%= quote.content %>
+      <br>
+      <small><%= quote.created_at.strftime("%d %b %Y at %H:%M") %></small>
+    </div>
+    <% unless quote == message.full_quote.last %>
+      <hr> <!-- Séparateur entre les citations -->
+    <% end %>
+<% end %>
+  

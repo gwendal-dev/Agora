@@ -5,5 +5,7 @@
 <br>
 
 <div>
-  <%= link_to "Back to message", subject_message_path(@subject, @message) %>
+<%= link_to subject_path(@subject), class: "back-to-subjects-link", aria_label: "Back to subjects" do %>
+  <i class="fas fa-arrow-left"></i> <!-- Icône de flèche gauche -->
+<% end %>
 </div>

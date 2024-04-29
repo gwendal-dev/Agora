@@ -12,6 +12,7 @@ class SubjectsController < ApplicationController
     @messages = @subject.messages
   end
 
+
   # GET /subjects/new
   def new
     @subject = Subject.new

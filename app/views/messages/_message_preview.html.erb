@@ -1,0 +1,9 @@
+<!-- app/views/messages/_message_preview.html.erb -->
+<div class="quote">
+  <strong><%= message.user.name %></strong>
+  <br>
+  <%= message.content %>
+  <br>
+  <small><%= message.created_at.strftime("%d %b %Y at %H:%M") %></small>
+  <hr> <!-- Séparateur entre les citations -->
+</div>

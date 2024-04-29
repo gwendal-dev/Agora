@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_many :subjects
   has_many :messages
   validates :name, presence: true, length: { maximum: 50 }
+  # Define permission to edit a message
+  def can_edit?(message)
+    self.id == message.user_id
+  end
 end

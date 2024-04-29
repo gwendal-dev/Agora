@@ -27,37 +27,53 @@
 
   <!-- List of Messages -->
   <ul class="message-list">
-    <% if @messages.present? %>
-      <% @messages.each do |message| %>
-        <li class="message">
-          <div class="message-header">
-            <%= image_tag "user.png", alt: "User profile image", class: "profile-image" %>
-            <span class="message-user"><%= message.user.name %></span>
-            <%= link_to 'Reply', '#', class: "quote-link", data: { content: message.content, username: message.user.name, date: message.created_at.strftime("%d %b %Y %H:%M") } %>
-            <% if user_signed_in? && current_user == message.user %>
-              <% if message.created_at >= 5.minutes.ago %>
-                <%= link_to edit_subject_message_path(@subject, message), class: "edit-message-link", "aria-label" => "Edit message" do %>
-                  <i class="fa fa-pencil-alt"></i>
-                <% end %>
+  <% if @messages.present? %>
+    <% @messages.each do |message| %>
+      <li class="message">
+        <div class="message-header">
+          <%= image_tag "user.png", alt: "User profile image", class: "profile-image" %>
+          <span class="message-user"><%= message.user.name %></span>
+          <% if user_signed_in? && current_user == message.user %>
+            <% if message.created_at >= 5.minutes.ago %>
+              <%= link_to edit_subject_message_path(@subject, message), class: "edit-message-link", "aria-label" => "Edit message" do %>
+                <i class="fa fa-pencil-alt"></i>
               <% end %>
-              <%= button_to "X", subject_message_path(@subject, message), method: :delete, data: { confirm: "Are you sure?" }, class: "close-button" %>
             <% end %>
+            <%= button_to "X", subject_message_path(@subject, message), method: :delete, data: { confirm: "Are you sure?" }, class: "close-button" %>
+          <% end %>
+        </div>
+        <% if message.quoted_message %>
+          <div class="quoted-preview" style="position: relative; top: -10px; left: 20px; z-index: 1;">
+            <%= render partial: "messages/quote_preview", locals: { message: message } %>
           </div>
-          <div class="message-content">
-            <%= message.content %>
-            <br>
-            <small class="message-date"><%= message.created_at.strftime("%d %b %Y %H:%M") %></small>
-          </div>
-        </li>
-      <% end %>
-    <% else %>
-      <p>No messages to display.</p>
+        <% end %>
+        <div class="message-content">
+          <%= message.content %>
+          <br>
+          <small class="message-date"><%= message.created_at.strftime("%d %b %Y %H:%M") %></small>
+          <%= link_to '#', class: "quote-link", data: { 
+            subject_id: @subject.id, 
+            message_id: message.id, 
+            content: message.content, 
+            username: message.user.name, 
+            date: message.created_at.strftime("%d %b %Y %H:%M") 
+          } do %>
+            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Reply
+          <% end %>
+        </div>
+      </li>
     <% end %>
-  </ul>
+  <% else %>
+    <p>No messages to display.</p>
+  <% end %>
+</ul>
+
 
   <!-- Form for Creating a New Message -->
   <div class="new-message-form">
-    <%= form_with(model: [@subject, Message.new], local: true) do |form| %>
+  <div id="quote-display" style="display: none;">Citations will appear here</div>
+  <%= form_with(model: [@subject, Message.new], local: true) do |form| %>
+    <%= form.hidden_field :quote_id, id: "quote_id" %>
       <div class="field">
         <%= form.label :content, "Message:" %>
         <%= form.text_area :content, class: "message-content-textarea" %>
@@ -66,5 +82,4 @@
         <%= form.submit "Add Message", class: "submit-button" %>
       </div>
     <% end %>
-  </div>
 </div>
