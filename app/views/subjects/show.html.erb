@@ -33,7 +33,7 @@
           <div class="message-header">
             <%= image_tag "user.png", alt: "User profile image", class: "profile-image" %>
             <span class="message-user"><%= message.user.name %></span>
-            <%= link_to 'Quote', '#', class: "quote-link", data: { content: message.content, username: message.user.name, date: message.created_at.strftime("%d %b %Y %H:%M") } %>
+            <%= link_to 'Reply', '#', class: "quote-link", data: { content: message.content, username: message.user.name, date: message.created_at.strftime("%d %b %Y %H:%M") } %>
             <% if user_signed_in? && current_user == message.user %>
               <% if message.created_at >= 5.minutes.ago %>
                 <%= link_to edit_subject_message_path(@subject, message), class: "edit-message-link", "aria-label" => "Edit message" do %>
