@@ -1,34 +1,43 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Attacher un événement de clic à tous les liens avec la classe 'quote-link'
   document.querySelectorAll(".quote-link").forEach(function (link) {
     link.addEventListener("click", function (event) {
-      event.preventDefault(); // Empêcher le lien de suivre l'URL
+      event.preventDefault(); // Prevent the link from following the URL
 
-      // Récupérer les données nécessaires stockées dans les attributs data-*
+      // Retrieve the necessary data stored in the data-* attributes
       const messageId = this.dataset.messageId;
       const content = this.dataset.content;
       const username = this.dataset.username;
       const date = this.dataset.date;
 
-      // Construire le format de la citation
-      const formattedQuote = `${username} said on ${date}: "${content}"`;
+      // Regular expression to detect YouTube URLs
+      const youtubeRegex =
+        /(https?:\/\/(?:www\.)?youtube\.com\/watch\?v=|https?:\/\/youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const matches = content.match(youtubeRegex);
+      let videoEmbed = "";
+      let textContent = content;
 
-      // Créer un élément de div pour afficher le message cité
+      if (matches) {
+        const videoId = matches[2];
+        videoEmbed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        textContent = content.replace(youtubeRegex, ""); // Remove the URL from the text content
+      }
+
+      // Create div elements to display the quoted message and video
       const quoteContainer = document.createElement("div");
       quoteContainer.classList.add("quoted-message");
-      quoteContainer.textContent = formattedQuote;
+      quoteContainer.innerHTML = `${videoEmbed}<br>${textContent}`;
 
-      // Ajouter le conteneur de citation au-dessus du formulaire
+      // Add the quote container above the form
       const formContainer = document.querySelector(".new-message-form");
       formContainer.parentNode.insertBefore(quoteContainer, formContainer);
 
-      // Faire défiler jusqu'au formulaire pour une meilleure expérience utilisateur
+      // Scroll to the form for a better user experience
       formContainer.scrollIntoView({
         behavior: "smooth",
-        block: "start", // Faire défiler jusqu'au début du formulaire
+        block: "start", // Scroll to the start of the form
       });
 
-      // Mettre à jour le champ caché dans le formulaire avec l'ID du message cité
+      // Update the hidden field in the form with the ID of the quoted message
       const quoteIdInput = document.getElementById("quote_id");
       if (quoteIdInput) {
         quoteIdInput.value = messageId;

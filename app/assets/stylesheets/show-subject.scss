@@ -89,7 +89,6 @@
 }
 
 .message-content {
-  width: 90%;
   word-wrap: break-word; /* Ensures that long words will wrap and not cause overflow */
   overflow-wrap: break-word; /* Breaks the word at the edge of the content box if needed */
   background-color: #fff;
@@ -303,9 +302,6 @@
 }
 
 .quote-link {
-  position: relative;
-  top: 50px;
-  left: 390px;
   color: #333;
   text-decoration: none;
 }
@@ -328,4 +324,11 @@
 small,
 .small {
   font-size: 0.65em;
+}
+.message-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+.content {
+  margin-bottom: 30px;
 }

@@ -17,6 +17,8 @@ label {
   min-height: 100px; /* Hauteur ajustable selon vos besoins */
   padding: 10px;
   border-radius: 5px;
+  width: 100%;
+  resize: none;
 }
 
 .actions {
@@ -36,9 +38,6 @@ label {
   background-color: #137821; /* Couleur du fond du bouton au survol */
 }
 
-.message-content {
-  resize: none;
-}
 /* Custom Form Styling */
 .custom-form {
   max-width: 600px;

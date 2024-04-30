@@ -48,7 +48,7 @@ class MessagesController < ApplicationController
     @message.user = current_user # Ensure this assignment is correct, given your user session management
   
     if @message.save
-      redirect_to subject_message_path(@subject, @message), notice: 'Message created successfully.'
+      redirect_to subject_path(@subject), notice: 'Message created successfully.'
     else
       render :new
     end

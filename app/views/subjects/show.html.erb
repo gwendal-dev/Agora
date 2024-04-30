@@ -20,6 +20,7 @@
       <% end %>
     </div>
     <div class="message-content">
+    <%= youtube_embed(@subject.content) %>
       <%= @subject.content %>
     </div>
   </div>
@@ -48,18 +49,20 @@
           </div>
         <% end %>
         <div class="message-content">
-          <%= message.content %>
+        <div class="content"><%= youtube_embed(message.content) %></div>
           <br>
-          <small class="message-date"><%= message.created_at.strftime("%d %b %Y %H:%M") %></small>
-          <%= link_to '#', class: "quote-link", data: { 
-            subject_id: @subject.id, 
-            message_id: message.id, 
-            content: message.content, 
-            username: message.user.name, 
-            date: message.created_at.strftime("%d %b %Y %H:%M") 
-          } do %>
-            <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Reply
-          <% end %>
+          <div class="message-bottom"
+            <small class="message-date"><small><%= message.created_at.strftime("%d %b %Y %H:%M") %></small>
+            <%= link_to '#', class: "quote-link", data: { 
+              subject_id: @subject.id, 
+              message_id: message.id, 
+              content: message.content, 
+              username: message.user.name, 
+              date: message.created_at.strftime("%d %b %Y %H:%M") 
+            } do %>
+              <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Reply
+            <% end %>
+          </div>
         </div>
       </li>
     <% end %>
